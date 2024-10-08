@@ -1,0 +1,20 @@
+#lang racket
+
+(define (my-list-ref l index)
+  (define (index-of i a)
+    (if(zero? i)
+       (car a)
+       (index-of (sub1 i) (cdr a))
+        )
+    )
+
+  (if(or (negative? index) (>= index (length l)))
+     (error "Invalid index!")
+     (index-of index l)
+     )
+  )
+
+(= (my-list-ref '(1 2 3) 0) 1)
+(= (my-list-ref '(1 2 3) 1) 2)
+(equal? (my-list-ref '("Hello" 2 ("nested list")) 0) "Hello")
+(my-list-ref '(1 2 3) -100) ; error: Invalid index!
